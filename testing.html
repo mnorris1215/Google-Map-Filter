@@ -5,36 +5,9 @@
 
         <div id="gmap" style="width:100%;height:80%;"></div>
 
-        <script>
-var coordinates;
-var map;
-function showMap() {
-    map = new google.maps.Map(document.getElementById('gmap'), {
-          zoom: 11,
-          center: new google.maps.LatLng(41.8857718, -87.6656355),
-          mapTypeId: 'terrain'
-        });
+        <script type="text/javascript" src="map-filter.js"></script>
 
-    var script = document.createElement("script");
-    script.src = "data.js";
-    document.getElementsByTagName("head")[0].appendChild(script);
-}
-
-
-window.geojson_callback = function(results) {
-        for (var i = 0; i < results.features.length; i++) {
-        coordinates = results.features[i].geometry.coordinates;
-        var centerCoord = new google.maps.LatLng(coordinates[0], coordinates[1]);
-        var marker = new google.maps.Marker({
-            position: centerCoord,
-            title: results.features.Full_Address,
-            map: map
-          });
-    }
-}
-        </script>
-
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SZP-jZrirsSUc1bzX5UOjFAnaLe8m24&callback=showMap"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SZP-jZrirsSUc1bzX5UOjFAnaLe8m24&callback=showMap&libraries=visualization"></script>
 
     </body>
 </html>
