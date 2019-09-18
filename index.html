@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+<script>
+var coordinates;
+var map;
+
+function initialize() {
+    map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: new google.maps.LatLng(41.869053399999899,-87.665418399999893),
+          mapTypeId: 'terrain'
+        });
+
+    var script = document.createElement("script");
+    script.src = "data.js";
+    document.getElementsByTagName("head")[0].appendChild(script);
+
+}
+
+window.geojson_callback = function(results) {
+    for (var i = 0; i < results.features.length; i++) {
+        coordinates = results.features[i].geometry.coordinates;
+        var latLng = new google.maps.LatLng(coordinates[1],coordinates[0]);
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });
+    }
+}
+</script>
+
+
+    <!-- Google Maps API -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SZP-jZrirsSUc1bzX5UOjFAnaLe8m24&callback=initialize">
+    </script>
+    <!-- <script type="text/javascript" src="testing.js"></script> -->
+  </body>
+</html>
