@@ -171,26 +171,25 @@ function filterCategories(){
        }
     }
 
-    var min = document.getElementById('min');
-    var max = document.getElementById('max');
 
 }
 
 
+function filterMarkers() {
+    var min = document.getElementById('min').value;
+    var max = document.getElementById('max').value;
+    var numRange = document.getElementById('num-range');
+    var currentCat = numRange.value;
 
+    for (var i = 0; i < markerprops.length; i++) {
+        filter = markerprops[i];
 
-//
-//
-// function filterMarkers() {
-//     for (var i = 0; i < markerprops.length; i++) {
-//         filter = markerprops[i];
-//
-//         if(min <= filter.CURRENT_TOTAL && filter.CURRENT_TOTAL <= max ){
-//             filter.setVisible(true);
-//
-//         }else{
-//             filter.setVisible(false);
-//         }
-//     }
-//     console.log(filter.CURRENT_TOTAL);
-// }
+        if(min <= filter.properties[currentCat] && filter.properties[currentCat] <= max){
+            filter.setVisible(true);
+        }else{
+            filter.setVisible(false);
+        }
+    console.log(filter.properties[currentCat]);
+}
+
+}
