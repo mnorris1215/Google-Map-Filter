@@ -83,8 +83,6 @@ function dropDownLists(category, options){
     var appealStatus = ['Appeal Review Complete'];
     var appealResult = ['Assessed Value Adjusted','Assessed Value Not Adjusted'];
 
-
-     console.log("category=" + category.value);
    switch (category.value) {
        case 'CLASS_DESCRIPTION':
            options.options.length = 0;
@@ -161,30 +159,26 @@ function createOption(category, text, value) {
    console.log("option=" + opt.value);
 }
 
-function filterCategories(options, marker){
+function filterCategories(){
+
     for (var i = 0; i < markerprops.length; i++) {
         marker = markerprops[i];
 
-        for (var key in marker) {
-          if (marker.hasOwnProperty(key) == options.value) {
-            marker.setVisible(true);
-        }else{
-            marker.setVisible(false);
-        }
-
+        if (Object.values(marker.properties).indexOf(options.value) > -1) {
+           marker.setVisible(true);
+       }else{
+           marker.setVisible(false);
+       }
     }
-    console.log(marker.hasOwnProperty(key));
 
-    }
+    var min = document.getElementById('min');
+    var max = document.getElementById('max');
+
 }
 
 
 
 
-
-
-// var min = document.getElementById('min');
-// var max = document.getElementById('max');
 //
 //
 // function filterMarkers() {
