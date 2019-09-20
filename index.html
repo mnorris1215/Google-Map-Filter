@@ -1,60 +1,91 @@
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Heatmaps</title>
-    <style>
-      /* to have the map be displayed as large as possible */
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD4SZP-jZrirsSUc1bzX5UOjFAnaLe8m24&libraries=visualization"></script>
-    <script>
-var map, pointarray, heatmap, coordinates;
+<html style="height:100%;margin:40;padding:40">
 
-// a shortened version of the data for Google's taxi example
+<head>
 
-var taxiData = [
-  new google.maps.LatLng(41.8857718, -87.6656355)
-  // ...
-];
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+    <body style="height:90%;margin:10;padding:20">
+        <!-- <div id="app"> -->
 
 
-function initialize() {
-  // the map's options
-  var mapOptions = {
-    zoom: 13,
-    center: new google.maps.LatLng(41.8857718, -87.6656355),
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-  };
+            <h1>Enodo Assessment</h1>
 
-  // the map and where to place it
-  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  var pointArray = new google.maps.MVCArray(taxiData);
 
-  // what data for the heatmap and how to display it
-  heatmap = new google.maps.visualization.HeatmapLayer({
-    data: pointArray,
-    radius: 50
-  });
+            <h2>Filters</h2>
+            <select id="category" onchange="dropDownLists(this,document.getElementById('options'))">
+                <option value="CLASS_DESCRIPTION">Description</option>
+                <option value="Street">Street</option>
+                <option value="RES_TYPE"> Residential Type</option>
+                <option value="BLDG_USE">Building Usage</option>
+                <option value="EXT_DESC">Exterior Description</option>
+                <option value="BSMT_DESC">Basement Description</option>
+                <option value="ATTIC_DESC">Attic Description</option>
+                <option value="GAR_DESC">Garage Description</option>
+                <option value="APPEAL_A_STATUS">Appeal Status</option>
+                <option value="APPEAL_A_RESULT">Appeal Result</option>
+            </select>
 
-  // placing the heatmap on the map
-  heatmap.setMap(map);
-}
+            <select id="options" onchange='filterCategories(this)'>
+                <option value="" disabled selected>Select a Category</option>
+            </select>
+            <br />
+            <hr />
 
-// as soon as the document is ready the map is initialized
-google.maps.event.addDomListener(window, 'load', initialize);
 
-    </script>
-  </head>
 
-  <body>
-    <!-- this is where the map finally is drawn onto -->
-    <div id="map-canvas"></div>
-  </body>
+            <select id="num-range">
+                <option value="Latitude">Latitude</option>
+                <option value="Longitude">Longitude</option>
+                <option value="Zip"> Zip</option>
+                <option value="OVACLS">OVACLS</option>
+                <option value="CURRENT_LAND">Current Land</option>
+                <option value="CURRENT_BUILDING">Current Building</option>
+                <option value="CURRENT_TOTAL">Current Total</option>
+                <option value="ESTIMATED_MARKET_VALUE">Estimated Market Value</option>
+                <option value="PRIOR_LAND">Prior Land</option>
+                <option value="PRIOR_BUILDING">Prior Building</option>
+                <option value="PRIOR_TOTAL">Prior Total</option>
+                <option value="PPRIOR_LAND">Previous Prior Land</option>
+                <option value="PPRIOR_BUILDING">Previous Prior Building</option>
+                <option value="PPRIOR_TOTAL">Previous Prior Total</option>
+                <option value="PPRIOR_YEAR">Previous Prior Year</option>
+                <option value="TOWN">Town</option>
+                <option value="VOLUME">Volume</option>
+                <option value="TAX_CODE">Tax Code</option>
+                <option value="NEIGHBORHOOD">Neighborhood</option>
+                <option value="HOUSENO">House Number</option>
+                <option value="APT_DESC">Apartment Description</option>
+                <option value="COMM_UNITS">Community Units</option>
+                <option value="FULL_BATH">Full Bath</option>
+                <option value="HALF_BATH">Half Bath</option>
+                <option value="AC">AC</option>
+                <option value="FIREPLACE">Fireplace</option>
+                <option value="AGE">Age</option>
+                <option value="BUILDING_SQ_FT">Building SqFt</option>
+                <option value="LAND_SQ_FT">Land Sqft</option>
+                <option value="UNITS_TOT">Units Total</option>
+                <option value="SALE_AMOUNT">Sale Amount</option>
+                <option value="APPEAL_A">Appeal A</option>
+                <option value="APPEAL_A_PROPAV">APPEAL_A_PROPAV</option>
+                <option value="APPEAL_A_CURRAV">APPEAL_A_CURRAV</option>
+            </select>
+
+            <div class="num-inputs">
+                <label for="min">Min:</label>
+                <input type="text" id="min" value="0">
+                <label for="max">Max:</label>
+                <input type="text" id="max" value="0">
+                <button type="submit" onclick="filterMarkers(this)" name="button">Submit Numbers</button>
+            </div>
+            <div id="gmap" style="width:100%;height:80%;"></div>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SZP-jZrirsSUc1bzX5UOjFAnaLe8m24&callback=showMap&libraries=visualization"></script>
+
+        <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.12.0/index.js"></script>
+        <script async defer type="text/javascript" src="map-filter.js"></script>
+
+    </body>
 </html>
