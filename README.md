@@ -16,10 +16,14 @@ comfortable with the Vue framework, so learning how to successfully call an API 
 framework is a task that I am currently enjoying.
 
 
+
+
 Styling?
 
 I plan to use the Element Desktop UI Vue library for pre-defined styling rules. Once the project is integrated in Vue, styling
 will quickly follow.
+
+
 
 
 API Key Vunerability?
@@ -27,8 +31,11 @@ API Key Vunerability?
 Vue offers a way to keep an API key secret during production. I am sure that there is a plain JavaScript way to achieve this as well, and is one of the lessons along the learning curve.
 
 
+
+
+
 So, when are you going to finish this?
 
-This project will be complete before September 22, 2019. 
+This project will be complete before September 22, 2019.  
 
 
